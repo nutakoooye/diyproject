@@ -28,7 +28,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post-detail', args=[str(self.id)])
+        return reverse('blog-detail', args=[str(self.id)])
 
 
 class Comment(models.Model):
@@ -40,3 +40,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.author
+
+    class Meta:
+        ordering = ['date_add']

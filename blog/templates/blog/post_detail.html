@@ -1,0 +1,21 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+
+<p><strong>Post date: </strong>{{ post.date_add }}</p>
+<p>
+    <strong>Author: </strong>
+    <a href="{{ post.blogger.get_absolute_url }}">{{ post.blogger }}</a>
+</p>
+<p><strong>Description:</strong></p>
+<p>{{ post.content }}</p>
+<div style="margin-left:20px;margin-top:20px;">
+    <h4>Comments</h4>
+    {% for comment in post.comment_set.all %}
+    <hr>
+    <p>{{ comment.author }} ({{ comment.date_add }}) - {{ comment.message }}</p>
+    {% endfor %}
+    <hr>
+</div>
+{% endblock %}
