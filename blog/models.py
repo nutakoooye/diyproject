@@ -41,7 +41,7 @@ class Comment(models.Model):
     date_add = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.author
+        return f"{self.author.first_name} {self.author.last_name}"
 
     class Meta:
         ordering = ['date_add']
