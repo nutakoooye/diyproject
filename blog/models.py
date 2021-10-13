@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -23,6 +24,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-date_add']
+        permissions = (('can_create_new_post', 'Can create new post'),)
 
     def __str__(self):
         return self.title
@@ -33,7 +35,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
 
-    author = models.CharField(max_length=255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.TextField()
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     date_add = models.DateTimeField(auto_now_add=True)
@@ -43,3 +45,4 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['date_add']
+
